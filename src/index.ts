@@ -1,25 +1,16 @@
-const express = require("express");
+import express, { Request, Response } from "express";
+
 const app = express();
+const port = process.env.PORT || 8080;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.get("/", (req: any, res: any) => {
-  try {
-    res.send({ name: "hoge" });
-  } catch (error) {
-    res.sendStatus(500);
-  }
+app.get("/", (_req: Request, res: Response) => {
+  return res.send("Express Typescript on Vercel");
 });
 
-app.get("/ping", (_req: any, res: any) => {
-  return res.send({ name: "pong" });
+app.get("/ping", (_req: Request, res: Response) => {
+  return res.send("pong 🏓");
 });
 
-//app.listen(process.env.PORT || 3000);
-app.listen({ port: 3000 }, () => {
-  console.log(`Server ready at http://localhost:3000`);
+app.listen(port, () => {
+  return console.log(`Server is listening on ${port}`);
 });
-console.log("starts");
-
-export default app;
